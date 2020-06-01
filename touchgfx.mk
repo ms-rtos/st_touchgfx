@@ -56,11 +56,6 @@ src/app/TouchGFX/generated/images/src/__designer/Blue_Check_buttons_Check_mark_a
 src/app/TouchGFX/generated/images/src/__designer/Blue_Check_buttons_Check_mark_inactive.cpp \
 src/app/TouchGFX/generated/images/src/__designer/Blue_Check_buttons_Check_mark_normal.cpp \
 src/app/TouchGFX/generated/images/src/__designer/Blue_Check_buttons_Check_mark_pressed.cpp \
-src/app/TouchGFX/generated/images/src/__designer/Blue_Clocks_Backgrounds_clock_standard_background.cpp \
-src/app/TouchGFX/generated/images/src/__designer/Blue_Clocks_Hands_clock_standard_hour_hand.cpp \
-src/app/TouchGFX/generated/images/src/__designer/Blue_Clocks_Hands_clock_standard_minute_hand.cpp \
-src/app/TouchGFX/generated/images/src/__designer/Blue_Clocks_Hands_clock_standard_second_hand.cpp \
-src/app/TouchGFX/generated/images/src/__designer/Blue_Icons_Add_new_32.cpp \
 src/app/TouchGFX/generated/images/src/__designer/Blue_ProgressIndicators_bg_medium_progress_indicator_bg_square_0_degrees.cpp \
 src/app/TouchGFX/generated/images/src/__designer/Blue_ProgressIndicators_fill_tiling_progress_indicator_fill_striped_normal_horizontal.cpp \
 src/app/TouchGFX/generated/images/src/__designer/Blue_Togglebars_Toggle_round_large_button_OFF.cpp \

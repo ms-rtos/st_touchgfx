@@ -10,6 +10,8 @@
  *
  */
 
+#include <ms_rtos.h>
+
 #include <texts/TypedTextDatabase.hpp>
 #include <fonts/ApplicationFontProvider.hpp>
 #include <gui/common/FrontendHeap.hpp>
@@ -25,25 +27,65 @@
 extern "C" void touchgfx_init();
 extern "C" void touchgfx_taskEntry();
 
-static MsTouchController tc;
-static touchgfx::NoDMA dma; //For windows/linux, DMA transfers are simulated
-static LCD32bpp display;
-static ApplicationFontProvider fontProvider;
-static Texts texts;
-static TouchGFXHAL hal(dma, display, tc, 480, 272);
+using namespace touchgfx;
+
+static TouchGFXHAL *hal;
+
+int ms_fb_fd;
+ms_fb_var_screeninfo_t ms_fb_var_info;
+ms_fb_fix_screeninfo_t ms_fb_fix_info;
 
 void touchgfx_init()
 {
+    MsTouchController *tc = new MsTouchController();
+    ApplicationFontProvider *fontProvider = new ApplicationFontProvider();
+    Texts *texts = new Texts();
+    LCD *display;
+    DMA_Interface *dma;
+
+    ms_fb_fd = ms_io_open("/dev/fb0", O_RDWR, 0666);
+    if (ms_fb_fd < 0) {
+        ms_printf("Failed to open /dev/fb0 device!\n");
+        abort();
+    }
+
+    if (ms_io_ioctl(ms_fb_fd, MS_FB_CMD_GET_VSCREENINFO, &ms_fb_var_info) < 0) {
+        ms_printf("Failed to get /dev/fb0 variable screen info!\n");
+        abort();
+    }
+
+    if (ms_io_ioctl(ms_fb_fd, MS_FB_CMD_GET_FSCREENINFO, &ms_fb_fix_info) < 0) {
+        ms_printf("Failed to get /dev/fb0 fix screen info!\n");
+        abort();
+    }
+
+    if (ms_fb_var_info.bits_per_pixel == 16) {
+        display = new LCD16bpp();
+    } else {
+        display = new LCD32bpp();
+    }
+
+    if ((ms_fb_fix_info.capability & MS_FB_BLIT_OP_COPY) ||
+        (ms_fb_fix_info.capability & MS_FB_BLIT_OP_FILL)) {
+        dma = new MsDMA();
+    } else {
+        dma = new NoDMA();
+    }
+
+    hal = new TouchGFXHAL(*dma, *display, *tc, ms_fb_var_info.xres, ms_fb_var_info.yres);
+
     Bitmap::registerBitmapDatabase(BitmapDatabase::getInstance(), BitmapDatabase::getInstanceSize());
-    TypedText::registerTexts(&texts);
+
+    TypedText::registerTexts(texts);
+
     Texts::setLanguage(0);
 
-    FontManager::setFontProvider(&fontProvider);
+    FontManager::setFontProvider(fontProvider);
 
     FrontendHeap& heap = FrontendHeap::getInstance();
     (void)heap; // we need to obtain the reference above to initialize the frontend heap.
 
-    hal.initialize();
+    hal->initialize();
 }
 
 void touchgfx_taskEntry()
@@ -54,7 +96,7 @@ void touchgfx_taskEntry()
      *
      * Note This function never returns
      */
-    hal.taskEntry();
+    hal->taskEntry();
 }
 
 extern "C" uint32_t CRC_Lock(void)

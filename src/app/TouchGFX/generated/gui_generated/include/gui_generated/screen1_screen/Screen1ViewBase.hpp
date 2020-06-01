@@ -12,7 +12,6 @@
 #include <touchgfx/widgets/RadioButton.hpp>
 #include <touchgfx/containers/progress_indicators/ImageProgress.hpp>
 #include <touchgfx/widgets/TextArea.hpp>
-#include <touchgfx/containers/clock/AnalogClock.hpp>
 #include <touchgfx/widgets/RadioButtonGroup.hpp>
 
 class Screen1ViewBase : public touchgfx::View<Screen1Presenter>
@@ -35,7 +34,6 @@ protected:
     touchgfx::RadioButton radioButton1;
     touchgfx::ImageProgress imageProgress1;
     touchgfx::TextArea textArea1;
-    touchgfx::AnalogClock analogClock1;
     touchgfx::RadioButtonGroup<1> radioButtonGroup1;
 
 private:

@@ -12,7 +12,7 @@ Screen1ViewBase::Screen1ViewBase()
     button1.setXY(7, 52);
     button1.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID));
 
-    toggleButton1.setXY(249, 6);
+    toggleButton1.setXY(229, 98);
     toggleButton1.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_TOGGLEBARS_TOGGLE_ROUND_LARGE_BUTTON_OFF_ID), touchgfx::Bitmap(BITMAP_BLUE_TOGGLEBARS_TOGGLE_ROUND_LARGE_BUTTON_ON_ID));
 
     radioButton1.setXY(0, 0);
@@ -34,21 +34,11 @@ Screen1ViewBase::Screen1ViewBase()
     textArea1.setLinespacing(0);
     textArea1.setTypedText(touchgfx::TypedText(T_SINGLEUSEID1));
 
-    analogClock1.setXY(214, 44);
-    analogClock1.setBackground(BITMAP_BLUE_CLOCKS_BACKGROUNDS_CLOCK_STANDARD_BACKGROUND_ID, 116, 116);
-    analogClock1.setupSecondHand(BITMAP_BLUE_CLOCKS_HANDS_CLOCK_STANDARD_SECOND_HAND_ID, 3, 66);
-    analogClock1.setupMinuteHand(BITMAP_BLUE_CLOCKS_HANDS_CLOCK_STANDARD_MINUTE_HAND_ID, 7, 67);
-    analogClock1.setMinuteHandSecondCorrection(false);
-    analogClock1.setupHourHand(BITMAP_BLUE_CLOCKS_HANDS_CLOCK_STANDARD_HOUR_HAND_ID, 7, 52);
-    analogClock1.setHourHandMinuteCorrection(false);
-    analogClock1.initializeTime24Hour(10, 10, 0);
-
     add(button1);
     add(toggleButton1);
     add(radioButton1);
     add(imageProgress1);
     add(textArea1);
-    add(analogClock1);
     radioButtonGroup1.add(radioButton1);
 }
 

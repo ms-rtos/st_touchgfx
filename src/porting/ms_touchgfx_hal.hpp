@@ -129,10 +129,6 @@ protected:
      * @param [in,out] adr New frame buffer address.
      */
     void setTFTFrameBuffer(uint16_t* adr);
-
-private:
-    int fb_fd;
-    uint16_t *frame_buffer;
 };
 
 #endif // MS_TOUCHGFX_HAL_HPP

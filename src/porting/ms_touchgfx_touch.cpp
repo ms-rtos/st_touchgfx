@@ -26,6 +26,8 @@ void MsTouchController::init()
 
 bool MsTouchController::sampleTouch(int32_t& x, int32_t& y)
 {
+    bool ret = false;
+
     if (touch_fd >= 0) {
         static int16_t last_x = 0;
         static int16_t last_y = 0;
@@ -38,7 +40,9 @@ bool MsTouchController::sampleTouch(int32_t& x, int32_t& y)
 
                 x = event.touch_x[0];
                 y = event.touch_y[0];
-                return true;
+
+                ret = true;
+
             } else {
                 x = last_x;
                 y = last_y;
@@ -46,5 +50,5 @@ bool MsTouchController::sampleTouch(int32_t& x, int32_t& y)
         }
     }
 
-    return false;
+    return ret;
 }

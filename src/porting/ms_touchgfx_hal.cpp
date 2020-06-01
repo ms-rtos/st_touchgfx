@@ -17,6 +17,10 @@
 
 using namespace touchgfx;
 
+extern int ms_fb_fd;
+extern ms_fb_var_screeninfo_t ms_fb_var_info;
+extern ms_fb_fix_screeninfo_t ms_fb_fix_info;
+
 void TouchGFXHAL::initialize()
 {
     // Calling parent implementation of initialize().
@@ -29,32 +33,11 @@ void TouchGFXHAL::initialize()
 
     registerEventListener(*(touchgfx::Application::getInstance()));
 
-    ms_fb_var_screeninfo_t var_info;
-    ms_fb_fix_screeninfo_t fix_info;
-
-    fb_fd = ms_io_open("/dev/fb0", O_RDWR, 0666);
-    if (fb_fd < 0) {
-        ms_printf("Failed to open /dev/fb0 device!\n");
-        abort();
-        return;
+    if (ms_fb_fix_info.capability & MS_FB_CAP_DOUBLE_FB) {
+        setFrameBufferStartAddresses((void*)ms_fb_fix_info.smem_start, (void*)ms_fb_fix_info.smem1_start, (void*)0);
+    } else {
+        setFrameBufferStartAddresses((void*)ms_fb_fix_info.smem_start, (void*)0, (void*)0);
     }
-
-    if (ms_io_ioctl(fb_fd, MS_FB_CMD_GET_VSCREENINFO, &var_info) < 0) {
-        ms_printf("Failed to get /dev/fb0 variable screen info!\n");
-        abort();
-    }
-
-    if (ms_io_ioctl(fb_fd, MS_FB_CMD_GET_FSCREENINFO, &fix_info) < 0) {
-        ms_printf("Failed to get /dev/fb0 fix screen info!\n");
-        abort();
-    }
-
-    frame_buffer = (uint16_t *)fix_info.smem_start;
-
-    /*
-     * TODO
-     */
-    setFrameBufferStartAddresses((void*)frame_buffer, (void*)0, (void*)0);
 
     /*
      * Set whether the DMA transfers are locked to the TFT update cycle. If
@@ -79,7 +62,7 @@ uint16_t* TouchGFXHAL::getTFTFrameBuffer() const
     // To overwrite the generated implementation, omit call to parent function
     // and implemented needed functionality here.
 
-    return frame_buffer;
+    return (uint16_t*)ms_fb_fix_info.smem_start;
 }
 
 /**
