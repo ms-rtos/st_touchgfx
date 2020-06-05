@@ -10,7 +10,7 @@
 #
 #--------------文件信息--------------------------------------------------------------------------------
 #
-# 文   件   名: touchgfx.mk
+# 文   件   名: touchgfx_demo.mk
 #
 # 创   建   人: IoT Studio
 #
@@ -27,7 +27,7 @@ include $(CLEAR_VARS_MK)
 #*********************************************************************************************************
 # Target
 #*********************************************************************************************************
-LOCAL_TARGET_NAME := touchgfx
+LOCAL_TARGET_NAME := touchgfx_demo
 
 #*********************************************************************************************************
 # Source list
@@ -67,27 +67,22 @@ src/app/TouchGFX/gui/src/common/FrontendApplication.cpp \
 src/app/TouchGFX/gui/src/model/Model.cpp \
 src/app/TouchGFX/gui/src/screen1_screen/Screen1Presenter.cpp \
 src/app/TouchGFX/gui/src/screen1_screen/Screen1View.cpp \
-src/porting/ms_touchgfx_configuration.cpp \
-src/porting/ms_touchgfx_dma.cpp \
-src/porting/ms_touchgfx_gpio.cpp \
-src/porting/ms_touchgfx_hal.cpp \
-src/porting/ms_touchgfx_os_wrappers.cpp \
-src/porting/ms_touchgfx_touch.cpp \
+src/ms_touchgfx_configuration.cpp \
 src/main.c
 
 #*********************************************************************************************************
 # Header file search path (eg. LOCAL_INC_PATH := -I"Your header files search path")
 #*********************************************************************************************************
 LOCAL_INC_PATH := \
--I./src/ST/touchgfx/framework/include \
--I./src/porting \
--I./src/app/TouchGFX/gui/include \
--I./src/app/TouchGFX/generated/gui_generated/include \
--I./src/app/TouchGFX/generated/fonts/include \
--I./src/app/TouchGFX/generated/images/include \
--I./src/app/TouchGFX/generated/texts/include \
--I./src/app/TouchGFX/App/generated \
--I./src/app/TouchGFX/App
+-I"$(MSRTOS_BASE_PATH)/st_touchgfx/src/ST/touchgfx/framework/include" \
+-I"$(MSRTOS_BASE_PATH)/st_touchgfx/src/porting" \
+-I"./src/app/TouchGFX/gui/include" \
+-I"./src/app/TouchGFX/generated/gui_generated/include" \
+-I"./src/app/TouchGFX/generated/fonts/include" \
+-I"./src/app/TouchGFX/generated/images/include" \
+-I"./src/app/TouchGFX/generated/texts/include" \
+-I"./src/app/TouchGFX/App/generated" \
+-I"./src/app/TouchGFX/App"
 
 #*********************************************************************************************************
 # Pre-defined macro (eg. -DYOUR_MARCO=1)
@@ -104,8 +99,10 @@ LOCAL_LINKFLAGS :=
 #*********************************************************************************************************
 # Depend library (eg. LOCAL_DEPEND_LIB := -la LOCAL_DEPEND_LIB_PATH := -L"Your library search path")
 #*********************************************************************************************************
-LOCAL_DEPEND_LIB      := -ltouchgfx
-LOCAL_DEPEND_LIB_PATH := -L"./src/ST/touchgfx/lib/core/cortex_m4f/gcc"
+LOCAL_DEPEND_LIB      := -ltouchgfx -ltouchgfx_port
+LOCAL_DEPEND_LIB_PATH := \
+-L"$(MSRTOS_BASE_PATH)/st_touchgfx/src/ST/touchgfx/lib/core/cortex_m4f/gcc" \
+-L"$(MSRTOS_BASE_PATH)/st_touchgfx/$(OUTDIR)"
 
 #*********************************************************************************************************
 # C++ config
@@ -134,7 +131,7 @@ LOCAL_POST_STRIP_CMD :=
 #*********************************************************************************************************
 # Depend target
 #*********************************************************************************************************
-LOCAL_DEPEND_TARGET := 
+LOCAL_DEPEND_TARGET := $(OUTDIR)/libtouchgfx_port.a
 
 include $(APPLICATION_MK)
 
