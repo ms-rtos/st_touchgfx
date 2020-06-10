@@ -103,3 +103,9 @@ extern "C" uint32_t CRC_Lock(void)
 {
     return (uint32_t)CRC_Lock;
 }
+
+extern "C" _PTR memcpy(_PTR dest, const _PTR src, size_t len)
+{
+    ms_arch_memcpy(dest, src, len);
+    return dest;
+}
