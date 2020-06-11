@@ -1,7 +1,7 @@
 
 ## ST TouchGFX
 
-TouchGFX library for ST MCU
+TouchGFX is a user-friendly graphical C++ tool integrated as a free tool in the STM32 ecosystem.
 
 License: ST under Ultimate Liberty license SLA0044, http://www.st.com/SLA0044.
 
