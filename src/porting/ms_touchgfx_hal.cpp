@@ -17,9 +17,9 @@
 
 using namespace touchgfx;
 
-extern int ms_fb_fd;
-extern ms_fb_var_screeninfo_t ms_fb_var_info;
-extern ms_fb_fix_screeninfo_t ms_fb_fix_info;
+extern int ms_tgfx_fb_fd;
+extern ms_fb_var_screeninfo_t ms_tgfx_fb_var_info;
+extern ms_fb_fix_screeninfo_t ms_tgfx_fb_fix_info;
 
 void TouchGFXHAL::initialize()
 {
@@ -33,10 +33,10 @@ void TouchGFXHAL::initialize()
 
     registerEventListener(*(touchgfx::Application::getInstance()));
 
-    if (ms_fb_fix_info.capability & MS_FB_CAP_DOUBLE_FB) {
-        setFrameBufferStartAddresses((void*)ms_fb_fix_info.smem_start, (void*)ms_fb_fix_info.smem1_start, (void*)0);
+    if (ms_tgfx_fb_fix_info.capability & MS_FB_CAP_DOUBLE_FB) {
+        setFrameBufferStartAddresses((void*)ms_tgfx_fb_fix_info.smem_start, (void*)ms_tgfx_fb_fix_info.smem1_start, (void*)0);
     } else {
-        setFrameBufferStartAddresses((void*)ms_fb_fix_info.smem_start, (void*)0, (void*)0);
+        setFrameBufferStartAddresses((void*)ms_tgfx_fb_fix_info.smem_start, (void*)0, (void*)0);
     }
 
     /*
@@ -62,7 +62,7 @@ uint16_t* TouchGFXHAL::getTFTFrameBuffer() const
     // To overwrite the generated implementation, omit call to parent function
     // and implemented needed functionality here.
 
-    return (uint16_t*)ms_fb_fix_info.smem_start;
+    return (uint16_t*)ms_tgfx_fb_fix_info.smem_start;
 }
 
 /**

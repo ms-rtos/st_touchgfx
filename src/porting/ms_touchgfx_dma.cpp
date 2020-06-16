@@ -20,9 +20,9 @@
 
 using namespace touchgfx;
 
-extern int ms_fb_fd;
-extern ms_fb_var_screeninfo_t ms_fb_var_info;
-extern ms_fb_fix_screeninfo_t ms_fb_fix_info;
+extern int ms_tgfx_fb_fd;
+extern ms_fb_var_screeninfo_t ms_tgfx_fb_var_info;
+extern ms_fb_fix_screeninfo_t ms_tgfx_fb_fix_info;
 
 /**
  * @fn MsDMA::MsDMA();
@@ -34,7 +34,7 @@ extern ms_fb_fix_screeninfo_t ms_fb_fix_info;
 MsDMA::MsDMA()
     : DMA_Interface(dma_queue), dma_queue(queue_storage, sizeof(queue_storage) / sizeof(queue_storage[0]))
 {
-    blit_caps = ms_fb_fix_info.capability & ~MS_FB_CAP_DOUBLE_FB;
+    blit_caps = ms_tgfx_fb_fix_info.capability & ~MS_FB_CAP_DOUBLE_FB;
 
     ms_semb_create("tgfx_dma2d_semb", MS_FALSE, MS_WAIT_TYPE_PRIO, &sembid);
 }
@@ -120,7 +120,7 @@ void MsDMA::setupDataCopy(const touchgfx::BlitOp& blitOp)
     dca.dst_fmt         = blitOp.dstFormat;
     dca.sembid          = sembid;
 
-    ms_io_ioctl(ms_fb_fd, MS_FB_CMD_DATA_COPY_OP, &dca);
+    ms_io_ioctl(ms_tgfx_fb_fd, MS_FB_CMD_DATA_COPY_OP, &dca);
 
     ms_semb_wait(sembid, MS_TIMEOUT_FOREVER);
 
@@ -154,7 +154,7 @@ void MsDMA::setupDataFill(const touchgfx::BlitOp& blitOp)
     dfa.dst_fmt         = blitOp.dstFormat;
     dfa.sembid          = sembid;
 
-    ms_io_ioctl(ms_fb_fd, MS_FB_CMD_DATA_FILL_OP, &dfa);
+    ms_io_ioctl(ms_tgfx_fb_fd, MS_FB_CMD_DATA_FILL_OP, &dfa);
 
     ms_semb_wait(sembid, MS_TIMEOUT_FOREVER);
 

@@ -22,6 +22,8 @@ void MsTouchController::init()
     if (touch_fd < 0) {
         ms_printf("Failed to open /dev/touch0 device!\n");
     }
+
+    ms_io_fcntl(touch_fd, F_SETFL, FNONBLOCK);
 }
 
 bool MsTouchController::sampleTouch(int32_t& x, int32_t& y)
