@@ -31,7 +31,7 @@ using namespace touchgfx;
 
 static TouchGFXHAL *ms_tgfx_hal;
 
-int ms_tgfx_fb_fd;
+int                    ms_tgfx_fb_fd;
 ms_fb_var_screeninfo_t ms_tgfx_fb_var_info;
 ms_fb_fix_screeninfo_t ms_tgfx_fb_fix_info;
 
