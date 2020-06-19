@@ -27,7 +27,7 @@ static ms_handle_t ms_tgfx_vsync_queue = 0;
 static ms_uint32_t ms_tgfx_dummy = 0x5a;
 static ms_uint32_t ms_tgfx_vsync_queue_buffer;
 
-#define __DEFAULT_TIMEOUT   10U
+#define __DEFAULT_TIMEOUT   5U
 
 void OSWrappers::initialize()
 {

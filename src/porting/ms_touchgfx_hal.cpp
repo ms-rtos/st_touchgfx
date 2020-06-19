@@ -17,7 +17,7 @@
 
 using namespace touchgfx;
 
-extern int ms_tgfx_fb_fd;
+extern int                    ms_tgfx_fb_fd;
 extern ms_fb_var_screeninfo_t ms_tgfx_fb_var_info;
 extern ms_fb_fix_screeninfo_t ms_tgfx_fb_fix_info;
 
