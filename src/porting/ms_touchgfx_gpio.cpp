@@ -6,7 +6,7 @@
  *
  * File: ms_touchgfx_gpio.cpp TouchGFX GPIO.
  *
- * Author: Jiao.jinxing <jiaojixing@acoinfo.com>
+ * Author: Jiao.jinxing <jiaojinxing@acoinfo.com>
  *
  */
 

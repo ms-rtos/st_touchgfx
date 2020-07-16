@@ -6,7 +6,7 @@
  *
  * File: ms_touchgfx_configuration.cpp TouchGFX configuration.
  *
- * Author: Jiao.jinxing <jiaojixing@acoinfo.com>
+ * Author: Jiao.jinxing <jiaojinxing@acoinfo.com>
  *
  */
 

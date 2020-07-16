@@ -6,7 +6,7 @@
  *
  * File: ms_touchgfx_dma.cpp TouchGFX DMA.
  *
- * Author: Jiao.jinxing <jiaojixing@acoinfo.com>
+ * Author: Jiao.jinxing <jiaojinxing@acoinfo.com>
  *
  */
 

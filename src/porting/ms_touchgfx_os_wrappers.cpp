@@ -6,7 +6,7 @@
  *
  * File: ms_touchgfx_os_wrappers.cpp TouchGFX OS wrappers.
  *
- * Author: Jiao.jinxing <jiaojixing@acoinfo.com>
+ * Author: Jiao.jinxing <jiaojinxing@acoinfo.com>
  *
  */
 

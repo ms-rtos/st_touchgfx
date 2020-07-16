@@ -6,7 +6,7 @@
  *
  * File: ms_touchgfx_touch.hpp TouchGFX touch screen.
  *
- * Author: Jiao.jinxing <jiaojixing@acoinfo.com>
+ * Author: Jiao.jinxing <jiaojinxing@acoinfo.com>
  *
  */
 
