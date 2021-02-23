@@ -36,8 +36,7 @@ bool MsTouchController::sampleTouch(int32_t& x, int32_t& y)
         ms_touch_event_t event;
 
         if (ms_io_read(touch_fd, &event, sizeof(event)) == sizeof(event)) {
-            if ((event.touch_detected > 0) &&
-                (event.touch_event_id[0] == MS_TOUCH_EVENT_ID_PRESS_DOWN)) {
+            if (event.touch_detected > 0) {
                 last_x = event.touch_x[0];
                 last_y = event.touch_y[0];
 

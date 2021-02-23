@@ -21,7 +21,6 @@
  * RENDER_TIME, /// Pin is high when frame rendering begins, low when finished
  * FRAME_RATE,  /// Pin is toggled when the frame buffers are swapped.
  * MCU_ACTIVE   /// Pin is high when framework is utilizing the MCU.
- *
  */
 
 using namespace touchgfx;
@@ -31,7 +30,6 @@ using namespace touchgfx;
  */
 void GPIO::init()
 {
-
 }
 
 /*
@@ -39,7 +37,6 @@ void GPIO::init()
  */
 void GPIO::set(GPIO_ID id)
 {
-
 }
 
 /*
@@ -47,7 +44,6 @@ void GPIO::set(GPIO_ID id)
  */
 void GPIO::clear(GPIO_ID id)
 {
-
 }
 
 /*
@@ -55,7 +51,6 @@ void GPIO::clear(GPIO_ID id)
  */
 void GPIO::toggle(GPIO_ID id)
 {
-
 }
 
 /*

@@ -14,12 +14,14 @@
 #include <stdlib.h>
 
 #include <ms_touchgfx_hal.hpp>
+#include <touchgfx/hal/OSWrappers.hpp>
 
 using namespace touchgfx;
 
 extern int                    ms_tgfx_fb_fd;
 extern ms_fb_var_screeninfo_t ms_tgfx_fb_var_info;
 extern ms_fb_fix_screeninfo_t ms_tgfx_fb_fix_info;
+extern ms_bool_t              ms_tgfx_using_double_fb;
 
 void TouchGFXHAL::initialize()
 {
@@ -33,7 +35,7 @@ void TouchGFXHAL::initialize()
 
     registerEventListener(*(touchgfx::Application::getInstance()));
 
-    if (ms_tgfx_fb_fix_info.capability & MS_FB_CAP_DOUBLE_FB) {
+    if (ms_tgfx_using_double_fb) {
         setFrameBufferStartAddresses((void*)ms_tgfx_fb_fix_info.smem_start, (void*)ms_tgfx_fb_fix_info.smem1_start, (void*)0);
     } else {
         setFrameBufferStartAddresses((void*)ms_tgfx_fb_fix_info.smem_start, (void*)0, (void*)0);
@@ -50,6 +52,17 @@ void TouchGFXHAL::initialize()
     lockDMAToFrontPorch(false);
 }
 
+void TouchGFXHAL::taskEntry()
+{
+    enableLCDControllerInterrupt();
+    enableInterrupts();
+
+    for (;;) {
+        OSWrappers::waitForVSync();
+        backPorchExited();
+    }
+}
+
 /**
  * Gets the frame buffer address used by the TFT controller.
  *
@@ -62,7 +75,15 @@ uint16_t* TouchGFXHAL::getTFTFrameBuffer() const
     // To overwrite the generated implementation, omit call to parent function
     // and implemented needed functionality here.
 
-    return (uint16_t*)ms_tgfx_fb_fix_info.smem_start;
+    if (ms_tgfx_using_double_fb) {
+        uint16_t *current_fb;
+
+        ms_io_ioctl(ms_tgfx_fb_fd, MS_FB_CMD_GET_FB, (ms_ptr_t)&current_fb);
+
+        return current_fb;
+    } else {
+        return (uint16_t*)ms_tgfx_fb_fix_info.smem_start;
+    }
 }
 
 /**
@@ -76,6 +97,10 @@ void TouchGFXHAL::setTFTFrameBuffer(uint16_t* address)
     //
     // To overwrite the generated implementation, omit call to parent function
     // and implemented needed functionality here.
+
+    if (ms_tgfx_using_double_fb) {
+        ms_io_ioctl(ms_tgfx_fb_fd, MS_FB_CMD_SET_FB, address);
+    }
 }
 
 /**
@@ -113,11 +138,6 @@ void TouchGFXHAL::flushFrameBuffer(const touchgfx::Rect& rect)
     // If the framebuffer is placed in Write Through cached memory (e.g. SRAM) then we need
     // to flush the Dcache to make sure framebuffer is correct in RAM. That's done
     // using SCB_CleanInvalidateDCache().
-
-    /*
-     * TODO
-     */
-    //SCB_CleanInvalidateDCache();
 }
 
 /**
@@ -130,6 +150,7 @@ void TouchGFXHAL::configureInterrupts()
     //
     // To overwrite the generated implementation, omit call to parent function
     // and implemented needed functionality here.
+    ms_io_ioctl(ms_tgfx_fb_fd, MS_FB_CMD_CFG_INTS, MS_NULL);
 }
 
 /**
@@ -141,6 +162,7 @@ void TouchGFXHAL::enableInterrupts()
     //
     // To overwrite the generated implementation, omit call to parent function
     // and implemented needed functionality here.
+    ms_io_ioctl(ms_tgfx_fb_fd, MS_FB_CMD_ENABLE_INTS, MS_NULL);
 }
 
 /**
@@ -152,6 +174,7 @@ void TouchGFXHAL::disableInterrupts()
     //
     // To overwrite the generated implementation, omit call to parent function
     // and implemented needed functionality here.
+    ms_io_ioctl(ms_tgfx_fb_fd, MS_FB_CMD_DISABLE_INTS, MS_NULL);
 }
 
 /**
@@ -164,4 +187,5 @@ void TouchGFXHAL::enableLCDControllerInterrupt()
     //
     // To overwrite the generated implementation, omit call to parent function
     // and implemented needed functionality here.
+    ms_io_ioctl(ms_tgfx_fb_fd, MS_FB_CMD_ENABLE_LCDC_INT, MS_NULL);
 }

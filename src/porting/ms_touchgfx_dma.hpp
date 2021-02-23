@@ -111,7 +111,6 @@ private:
     touchgfx::LockFreeDMA_Queue dma_queue;
     touchgfx::BlitOp            queue_storage[96];
     ms_uint32_t                 blit_caps;
-    ms_handle_t                 sembid;
 };
 
 #endif // MS_DMA_HPP

@@ -25,6 +25,16 @@ extern ms_fb_var_screeninfo_t ms_tgfx_fb_var_info;
 extern ms_fb_fix_screeninfo_t ms_tgfx_fb_fix_info;
 
 /**
+ * @fn ms_tgfx_dma2d_done;
+ *
+ * @brief DMA2D done signal handle.
+ */
+static void ms_tgfx_dma2d_done(int sig)
+{
+    touchgfx::HAL::getInstance()->signalDMAInterrupt();
+}
+
+/**
  * @fn MsDMA::MsDMA();
  *
  * @brief Default constructor.
@@ -36,7 +46,7 @@ MsDMA::MsDMA()
 {
     blit_caps = ms_tgfx_fb_fix_info.capability & ~MS_FB_CAP_DOUBLE_FB;
 
-    ms_semb_create("tgfx_dma2d_semb", MS_FALSE, MS_WAIT_TYPE_PRIO, &sembid);
+    ms_process_signal(MS_FB_SIGNAL_DMA2D_DONE, ms_tgfx_dma2d_done);
 }
 
 /**
@@ -48,7 +58,7 @@ MsDMA::MsDMA()
  */
 MsDMA::~MsDMA()
 {
-    ms_semb_destroy(sembid);
+    ms_process_signal(MS_FB_SIGNAL_DMA2D_DONE, MS_NULL);
 }
 
 /**
@@ -78,7 +88,6 @@ touchgfx::BlitOperations MsDMA::getBlitCaps()
  */
 void MsDMA::initialize()
 {
-
 }
 
 /**
@@ -118,13 +127,8 @@ void MsDMA::setupDataCopy(const touchgfx::BlitOp& blitOp)
     dca.alpha           = blitOp.alpha;
     dca.src_fmt         = blitOp.srcFormat;
     dca.dst_fmt         = blitOp.dstFormat;
-    dca.sembid          = sembid;
 
     ms_io_ioctl(ms_tgfx_fb_fd, MS_FB_CMD_DATA_COPY_OP, &dca);
-
-    ms_semb_wait(sembid, MS_TIMEOUT_FOREVER);
-
-    touchgfx::HAL::getInstance()->signalDMAInterrupt();
 }
 
 /**
@@ -152,11 +156,6 @@ void MsDMA::setupDataFill(const touchgfx::BlitOp& blitOp)
     dfa.alpha           = blitOp.alpha;
     dfa.src_fmt         = blitOp.srcFormat;
     dfa.dst_fmt         = blitOp.dstFormat;
-    dfa.sembid          = sembid;
 
     ms_io_ioctl(ms_tgfx_fb_fd, MS_FB_CMD_DATA_FILL_OP, &dfa);
-
-    ms_semb_wait(sembid, MS_TIMEOUT_FOREVER);
-
-    touchgfx::HAL::getInstance()->signalDMAInterrupt();
 }
