@@ -8,9 +8,8 @@
 #include <mvp/View.hpp>
 #include <gui/screen1_screen/Screen1Presenter.hpp>
 #include <touchgfx/widgets/Button.hpp>
-#include <touchgfx/widgets/ToggleButton.hpp>
+#include <touchgfx/containers/progress_indicators/BoxProgress.hpp>
 #include <touchgfx/widgets/RadioButton.hpp>
-#include <touchgfx/containers/progress_indicators/ImageProgress.hpp>
 #include <touchgfx/widgets/TextArea.hpp>
 #include <touchgfx/widgets/RadioButtonGroup.hpp>
 
@@ -30,9 +29,8 @@ protected:
      * Member Declarations
      */
     touchgfx::Button button1;
-    touchgfx::ToggleButton toggleButton1;
+    touchgfx::BoxProgress boxProgress1;
     touchgfx::RadioButton radioButton1;
-    touchgfx::ImageProgress imageProgress1;
     touchgfx::TextArea textArea1;
     touchgfx::RadioButtonGroup<1> radioButtonGroup1;
 

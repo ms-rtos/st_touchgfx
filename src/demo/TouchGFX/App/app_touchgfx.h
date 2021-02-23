@@ -4,7 +4,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -17,6 +17,5 @@
 
 void MX_TouchGFX_Init(void);
 void MX_TouchGFX_Process(void);
-void TouchGFX_Task(void *argument);
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

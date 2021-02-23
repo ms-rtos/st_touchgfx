@@ -57,7 +57,6 @@ src/demo/TouchGFX/generated/images/src/__designer/Blue_Check_buttons_Check_mark_
 src/demo/TouchGFX/generated/images/src/__designer/Blue_Check_buttons_Check_mark_normal.cpp \
 src/demo/TouchGFX/generated/images/src/__designer/Blue_Check_buttons_Check_mark_pressed.cpp \
 src/demo/TouchGFX/generated/images/src/__designer/Blue_ProgressIndicators_bg_medium_progress_indicator_bg_square_0_degrees.cpp \
-src/demo/TouchGFX/generated/images/src/__designer/Blue_ProgressIndicators_fill_tiling_progress_indicator_fill_striped_normal_horizontal.cpp \
 src/demo/TouchGFX/generated/images/src/__designer/Blue_Togglebars_Toggle_round_large_button_OFF.cpp \
 src/demo/TouchGFX/generated/images/src/__designer/Blue_Togglebars_Toggle_round_large_button_ON.cpp \
 src/demo/TouchGFX/generated/texts/src/LanguageGb.cpp \

@@ -4,7 +4,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -34,7 +34,7 @@ void TouchGFXGeneratedHAL::initialize()
 
     registerEventListener(*(touchgfx::Application::getInstance()));
 
-    setFrameBufferStartAddresses((void*)0xC0000000, (void*)0xC005FA00, (void*)0);
+    setFrameBufferStartAddresses((void*)0xC0000000, (void*)0xC003FC00, (void*)0);
     /*
      * Set whether the DMA transfers are locked to the TFT update cycle. If
      * locked, DMA transfer will not begin until the TFT controller has finished

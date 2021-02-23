@@ -4,7 +4,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -19,8 +19,13 @@
 /* USER CODE BEGIN TouchGFXHAL.cpp */
 
 #include "stm32f7xx.h"
+#include <touchgfx/hal/OSWrappers.hpp>
+#include <CortexMMCUInstrumentation.hpp>
+#include "FreeRTOS.h"
+#include "task.h"
 
 using namespace touchgfx;
+CortexMMCUInstrumentation instrumentation;
 
 void TouchGFXHAL::initialize()
 {
@@ -31,6 +36,10 @@ void TouchGFXHAL::initialize()
     // Please note, HAL::initialize() must be called to initialize the framework.
 
     TouchGFXGeneratedHAL::initialize();
+    lockDMAToFrontPorch(false);
+    instrumentation.init();
+    setMCUInstrumentation(&instrumentation);
+    enableMCULoadCalculation(true);
 }
 
 /**
@@ -140,6 +149,22 @@ void TouchGFXHAL::enableLCDControllerInterrupt()
     // and implemented needed functionality here.
 
     TouchGFXGeneratedHAL::enableLCDControllerInterrupt();
+}
+
+extern "C"
+{
+    portBASE_TYPE IdleTaskHook(void* p)
+    {
+        if ((int)p) //idle task sched out
+        {
+            touchgfx::HAL::getInstance()->setMCUActive(true);
+        }
+        else //idle task sched in
+        {
+            touchgfx::HAL::getInstance()->setMCUActive(false);
+        }
+        return pdTRUE;
+    }
 }
 
 /* USER CODE END TouchGFXHAL.cpp */

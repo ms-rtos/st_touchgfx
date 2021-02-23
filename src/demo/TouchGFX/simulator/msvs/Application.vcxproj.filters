@@ -131,46 +131,46 @@
       <UniqueIdentifier>{C07B02B9-A55E-47AA-AD61-59A6AAD754E6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\gui">
-      <UniqueIdentifier>BFDCB30F-B8C3-6FE2-5C4B-33E8D93C5192</UniqueIdentifier>
+      <UniqueIdentifier>2082AA68-C829-F14B-7AB5-A7AF79F50BF5</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\gui">
-      <UniqueIdentifier>3ECA0CD8-D1E0-2294-E91A-2E880837DD20</UniqueIdentifier>
+      <UniqueIdentifier>10E88C21-E089-3B3A-F55B-C593368FA2CA</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\gui\common">
-      <UniqueIdentifier>94FD4676-B25E-2056-7431-A7700114079A</UniqueIdentifier>
+      <UniqueIdentifier>3BE7FDC0-92B5-CA4E-894A-36795C301CF5</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\generated\gui_generated">
-      <UniqueIdentifier>9E5307E0-F75F-5BB4-E15A-D664C732FC8E</UniqueIdentifier>
+      <UniqueIdentifier>550ADD98-6DFE-F3C4-2EE8-A773C0CF6947</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\gui\screen1_screen">
-      <UniqueIdentifier>E1D26FCA-1EE7-575F-3996-6FAB13C0A0D4</UniqueIdentifier>
+      <UniqueIdentifier>E3F62124-9763-D728-77AF-415E3A375AFC</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\gui\model">
-      <UniqueIdentifier>BE2B8AA8-EDDB-0660-582E-EC53DAC9BF18</UniqueIdentifier>
+      <UniqueIdentifier>03D25CD1-61AE-3A07-7AE3-8F1A3CEE45F4</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\generated\gui_generated">
-      <UniqueIdentifier>C6AEB00D-0E32-FA55-981E-D14D1A8596B9</UniqueIdentifier>
+      <UniqueIdentifier>60899C46-F1EF-28CA-66FF-3700D44B129D</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\gui\model">
-      <UniqueIdentifier>3A1C8FBC-5E63-5068-EDE4-6456EA3E6E3D</UniqueIdentifier>
+      <UniqueIdentifier>AA3E65DA-7A7E-9EE9-4AD6-218164131C4D</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\gui\screen1_screen">
-      <UniqueIdentifier>4BEC952B-B3C4-EC6F-CD0D-A647C0842625</UniqueIdentifier>
+      <UniqueIdentifier>5E326DB0-86AE-E512-E77F-47B604EF1734</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\gui\common">
-      <UniqueIdentifier>5C251F80-4DC6-61AE-B697-1B0E71019809</UniqueIdentifier>
+      <UniqueIdentifier>EDA65E0A-E99B-2833-E8F1-57C573430666</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\generated\gui_generated\screen1_screen">
-      <UniqueIdentifier>5F40C61C-D72E-25D8-814D-CC53F52A7CF7</UniqueIdentifier>
+      <UniqueIdentifier>37261412-3FA2-CA50-3496-845CFE9A5BE9</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\generated\gui_generated\screen1_screen">
-      <UniqueIdentifier>C881D8F2-3050-B8D5-8B64-8C5E741C3B73</UniqueIdentifier>
+      <UniqueIdentifier>E6B1FD52-95B5-6DDE-7AF6-BDFAD168EA57</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\generated\gui_generated\common">
-      <UniqueIdentifier>40326F69-46D5-B389-8D3A-F7645D925BF9</UniqueIdentifier>
+      <UniqueIdentifier>953D57BC-CBFC-2632-4E32-2A812623F18C</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\generated\gui_generated\common">
-      <UniqueIdentifier>1BC9DC3D-D227-96DE-B2EA-3E2969CC4DD2</UniqueIdentifier>
+      <UniqueIdentifier>F8D3C88B-0DB1-222C-C384-70BB57F6FBA6</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
